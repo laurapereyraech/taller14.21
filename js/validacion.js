@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Validar formato de email
-        if (!email.validity.valid) {
+        if (!email.validity.valid || email.value.trim() === "") {
             email.setCustomValidity("El email no es válido.");
             email.classList.add("is-invalid");
             valid = false;
@@ -56,7 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Validar contraseña (mínimo 6 caracteres)
-        if (password1.value.length < 6) {
+        if (password1.value.trim() === "") {
+            password1.setCustomValidity("El campo contraseña es obligatorio.");
+            password1.classList.add("is-invalid");
+            valid = false;
+        } else if (password1.value.length < 6) {
             password1.setCustomValidity("La contraseña debe tener al menos 6 caracteres.");
             password1.classList.add("is-invalid");
             valid = false;
@@ -67,7 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Validar que las contraseñas coincidan
-        if (password1.value !== password2.value) {
+        if (password2.value.trim() === "") {
+            password2.setCustomValidity("Debes repetir la contraseña.");
+            password2.classList.add("is-invalid");
+            valid = false;
+        } else if (password1.value !== password2.value) {
             password2.setCustomValidity("Las contraseñas no coinciden.");
             password2.classList.add("is-invalid");
             valid = false;
@@ -112,18 +120,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Validar que las contraseñas coincidan
-        if (password1.value === password2.value) {
+        if (password1.value === password2.value && password2.value.trim() !== "") {
             document.getElementById("passwordsMatch").classList.remove("text-danger");
             document.getElementById("passwordsMatch").classList.add("text-success");
+            password2.classList.remove("is-invalid");
+            password2.classList.add("is-valid");
         } else {
             document.getElementById("passwordsMatch").classList.remove("text-success");
             document.getElementById("passwordsMatch").classList.add("text-danger");
+            password2.classList.add("is-invalid");
+            password2.classList.remove("is-valid");
         }
     });
 
     password2.addEventListener("input", function () {
         // Validar que las contraseñas coincidan en tiempo real
-        if (password1.value === password2.value) {
+        if (password1.value === password2.value && password1.value.trim() !== "") {
             document.getElementById("passwordsMatch").classList.remove("text-danger");
             document.getElementById("passwordsMatch").classList.add("text-success");
             password2.classList.remove("is-invalid");
