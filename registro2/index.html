@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,11 +36,17 @@
             <div class="col-sm-6">
               <label for="password1" class="form-label">Contraseña</label>
               <input type="password" class="form-control" id="password1">
+              <ul>
+                <li id="minLength" class="text-danger">Al menos 6 caragit cteres</li>
+              </ul>
             </div>
 
             <div class="col-sm-6">
               <label for="password2" class="form-label">Repetir contraseña</label>
               <input type="password" class="form-control" id="password2">
+              <ul>
+                <li id="passwordsMatch" class="text-danger">Las contraseñas deben coincidir</li>
+              </ul>
             </div>
 
             <div class="col-sm-12">
@@ -49,10 +54,11 @@
                 data-bs-target="#modalTerminos">Términos del servicio</button>
             </div>
 
-
             <button class="btn btn-primary" type="submit">Registrarme</button>
+          </div>
 
-
+          <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
+            Registro exitoso.
           </div>
         </div>
       </form>
